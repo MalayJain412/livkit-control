@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Dispatch Rule - CreativeNest Admin</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://feathericons.com/feather.css">
+    <link rel="stylesheet" href="../assets/styles/main.css">
+    <script src="/assets/config/runtime-config.js"></script>
+</head>
+<body class="bg-gray-50">
+    <div class="p-4 md:p-8 max-w-5xl mx-auto">
+        <div class="mb-8 flex items-center gap-4">
+            <button id="back-btn" class="p-2 hover:bg-gray-200 rounded-lg transition-colors text-gray-600" aria-label="Go back">
+                <i data-feather="arrow-left" class="w-6 h-6"></i>
+            </button>
+            <div>
+                <h1 class="text-2xl md:text-3xl font-bold text-gray-900">Edit Dispatch Rule</h1>
+                <p class="text-gray-600 mt-2" id="dispatch-subtitle">Loading...</p>
+            </div>
+        </div>
+
+        <div id="loading" class="text-center py-12 hidden">
+            <div class="inline-block">
+                <div class="w-8 h-8 border-4 border-gray-300 border-t-blue-600 rounded-full animate-spin"></div>
+            </div>
+            <p class="text-gray-600 mt-4">Loading dispatch rule...</p>
+        </div>
+
+        <div id="error-state" class="bg-red-50 border border-red-200 rounded-lg p-6 hidden mb-6">
+            <div class="flex items-start gap-4">
+                <i data-feather="alert-circle" class="w-6 h-6 text-red-600 flex-shrink-0 mt-0.5"></i>
+                <div class="min-w-0">
+                    <h3 class="font-semibold text-red-900">Error loading dispatch rule</h3>
+                    <p class="text-red-700 mt-2 break-words" id="error-message"></p>
+                </div>
+            </div>
+        </div>
+
+        <div id="form-container" class="bg-white rounded-lg shadow-sm border border-gray-200 hidden">
+            <form id="dispatch-edit-form" class="p-4 md:p-8 space-y-8">
+                <div>
+                    <h2 class="text-xl font-bold text-gray-900 mb-6 pb-4 border-b border-gray-100">Basic Details</h2>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="md:col-span-2">
+                            <label for="dispatch-id" class="block text-sm font-medium text-gray-700 mb-2">Dispatch Rule ID</label>
+                            <input
+                                type="text"
+                                id="dispatch-id"
+                                class="w-full px-4 py-2 border border-gray-300 rounded-lg bg-gray-50 text-gray-600 text-sm"
+                                readonly
+                            >
+                        </div>
+
+                        <div class="md:col-span-2">
+                            <label for="dispatch-name" class="block text-sm font-medium text-gray-700 mb-2">Name</label>
+                            <input
+                                type="text"
+                                id="dispatch-name"
+                                placeholder="Dispatch rule name"
+                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            >
+                        </div>
+
+                        <div class="md:col-span-2">
+                            <label for="dispatch-metadata" class="block text-sm font-medium text-gray-700 mb-2">Metadata (optional)</label>
+                            <input
+                                type="text"
+                                id="dispatch-metadata"
+                                placeholder=""
+                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            >
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h2 class="text-xl font-bold text-gray-900 mb-6 pb-4 border-b border-gray-100">Routing</h2>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="md:col-span-2">
+                            <label for="dispatch-rule-type" class="block text-sm font-medium text-gray-700 mb-2">Rule Type</label>
+                            <select
+                                id="dispatch-rule-type"
+                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"
+                            >
+                                <option value="individual">Individual (room prefix)</option>
+                                <option value="direct">Direct (room name)</option>
+                            </select>
+                        </div>
+
+                        <div id="individual-fields" class="md:col-span-2">
+                            <label for="dispatch-room-prefix" class="block text-sm font-medium text-gray-700 mb-2">Room Prefix</label>
+                            <input
+                                type="text"
+                                id="dispatch-room-prefix"
+                                placeholder="call-"
+                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            >
+                        </div>
+
+                        <div id="direct-fields" class="md:col-span-2 hidden">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <label for="dispatch-room-name" class="block text-sm font-medium text-gray-700 mb-2">Room Name</label>
+                                    <input
+                                        type="text"
+                                        id="dispatch-room-name"
+                                        placeholder=""
+                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                    >
+                                </div>
+                                <div>
+                                    <label for="dispatch-pin" class="block text-sm font-medium text-gray-700 mb-2">PIN (optional)</label>
+                                    <input
+                                        type="text"
+                                        id="dispatch-pin"
+                                        placeholder=""
+                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                    >
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h2 class="text-xl font-bold text-gray-900 mb-6 pb-4 border-b border-gray-100">Inbound Trunk IDs</h2>
+                    <div id="trunk-ids-list" class="flex flex-wrap gap-2 mb-3 text-sm"></div>
+                    <div class="flex flex-col sm:flex-row gap-2 items-stretch sm:items-center">
+                        <select
+                            id="trunk-select"
+                            class="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm bg-white"
+                        >
+                            <option value="">Loading inbound trunks...</option>
+                        </select>
+                        <button
+                            type="button"
+                            id="trunk-add-btn"
+                            class="px-4 py-2 bg-blue-50 text-blue-700 border border-blue-200 rounded-lg text-sm font-medium hover:bg-blue-100"
+                        >
+                            Add Trunk
+                        </button>
+                    </div>
+                    <p class="text-xs text-gray-500 mt-2">Changes are local until you hit Save.</p>
+                </div>
+
+                <div>
+                    <h2 class="text-xl font-bold text-gray-900 mb-6 pb-4 border-b border-gray-100">Agents</h2>
+                    <div id="agents-list" class="flex flex-wrap gap-2 mb-3 text-sm"></div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="agent-name" class="block text-xs font-medium text-gray-700 mb-1">Agent Name</label>
+                            <input
+                                type="text"
+                                id="agent-name"
+                                placeholder=""
+                                class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+                            >
+                        </div>
+                        <div>
+                            <label for="agent-metadata" class="block text-xs font-medium text-gray-700 mb-1">Agent Metadata (optional)</label>
+                            <input
+                                type="text"
+                                id="agent-metadata"
+                                placeholder=""
+                                class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+                            >
+                        </div>
+                    </div>
+                    <div class="flex justify-end mt-2">
+                        <button
+                            type="button"
+                            id="agent-add-btn"
+                            class="px-4 py-2 bg-blue-50 text-blue-700 border border-blue-200 rounded-lg text-sm font-medium hover:bg-blue-100"
+                        >
+                            Add Agent
+                        </button>
+                    </div>
+                    <p class="text-xs text-gray-500 mt-2">Agents are required and will replace the list on save.</p>
+                </div>
+
+                <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-6 border-t border-gray-100">
+                    <button
+                        type="submit"
+                        id="save-btn"
+                        class="px-8 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium flex items-center justify-center gap-2"
+                    >
+                        <i data-feather="check" class="w-5 h-5"></i>
+                        <span>Save Changes</span>
+                    </button>
+                    <button
+                        type="button"
+                        id="cancel-btn"
+                        class="px-8 py-3 border border-gray-300 rounded-lg text-sm text-gray-700 hover:bg-gray-50"
+                    >
+                        Cancel
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="toast" class="fixed bottom-4 right-4 left-4 sm:left-auto px-6 py-3 bg-gray-900 text-white rounded-lg shadow-lg hidden z-50 text-center sm:text-left" role="alert">
+        <p id="toast-message"></p>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <script src="../assets/scripts/config.js?v=1"></script>
+    <script src="../assets/scripts/api.js?v=3"></script>
+    <script src="../assets/scripts/ui.js"></script>
+    <script src="../assets/scripts/dispatch-edit.js"></script>
+</body>
+</html>

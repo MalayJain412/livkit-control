@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CreativeNest Admin - Login</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="assets/styles/main.css">
+    <script src="/assets/config/runtime-config.js"></script>
+    <script src="assets/scripts/config.js?v=1"></script>
+</head>
+<body class="bg-gray-50 min-h-screen flex items-center justify-center">
+    <div class="w-full max-w-md px-6">
+        <div class="bg-white rounded-2xl shadow-lg border border-gray-200 p-8">
+            <div class="text-center mb-8">
+                <h1 class="text-3xl font-bold text-gray-900">CreativeNest</h1>
+                <p class="text-sm text-gray-500 mt-2">Admin Console Login</p>
+            </div>
+
+            <form id="login-form" class="space-y-6">
+                <div>
+                    <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        autocomplete="username"
+                        placeholder="admin@creative.nest"
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        required
+                    >
+                </div>
+
+                <div>
+                    <label for="password" class="block text-sm font-medium text-gray-700 mb-2">Password</label>
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        autocomplete="current-password"
+                        placeholder="••••••••"
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        required
+                    >
+                </div>
+
+                <p id="login-error" class="text-sm text-red-600 hidden">Please enter both email and password.</p>
+
+                <button
+                    type="submit"
+                    class="w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium"
+                >
+                    Login
+                </button>
+            </form>
+
+            <p class="mt-6 text-xs text-gray-400 text-center">
+                Demo only 
+            </p>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const form = document.getElementById('login-form');
+            const errorEl = document.getElementById('login-error');
+
+            form.addEventListener('submit', function (e) {
+                e.preventDefault();
+
+                const email = document.getElementById('email').value.trim();
+                const password = document.getElementById('password').value.trim();
+
+                if (!email || !password) {
+                    errorEl.classList.remove('hidden');
+                    return;
+                }
+
+                errorEl.classList.add('hidden');
+
+                // Simulated successful login -> go to dashboard
+                window.location.href = window.APP_CONFIG && typeof window.APP_CONFIG.frontendUrl === 'function'
+                    ? window.APP_CONFIG.frontendUrl('/dashboard.html')
+                    : '/dashboard.html';
+            });
+        });
+    </script>
+</body>
+</html>

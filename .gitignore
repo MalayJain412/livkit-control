@@ -1,0 +1,4 @@
+__pycache__/
+.env
+venv/
+frontend/assets/config/runtime-config.js

@@ -1,0 +1,77 @@
+<div class="flex h-screen overflow-hidden">
+    <!-- Sidebar -->
+    <aside id="main-sidebar"
+        class="w-72 bg-white border-r border-gray-200 shadow-sm flex flex-col fixed left-0 top-0 h-screen z-50 transition-all duration-300">
+        <div class="p-6 border-b border-gray-100 flex items-center gap-4">
+            <button id="sidebar-toggle" class="p-2 rounded-lg hover:bg-gray-100 transition-colors">
+                <i data-feather="menu" class="w-6 h-6 text-gray-600"></i>
+            </button>
+            <div class="logo-text">
+                <h1 class="text-2xl font-bold text-gray-900">CreativeNest</h1>
+                <p class="text-sm text-gray-500 mt-1">Admin Console</p>
+            </div>
+        </div>
+
+        <!-- Navigation Menu -->
+        <nav class="flex-1 px-4 py-6 space-y-2">
+            <a href="/dashboard.html"
+                class="nav-item flex items-center px-4 py-3 rounded-lg text-gray-700 hover:bg-gray-100 transition-all"
+                data-nav="dashboard" title="Dashboard">
+                <i data-feather="home" class="w-5 h-5 flex-shrink-0 mr-3"></i>
+                <span class="nav-text">Dashboard</span>
+            </a>
+            
+
+            <!-- Trunks with dropdown for Inbound / Outbound -->
+            <div class="space-y-1">
+                <div class="nav-item flex items-center px-4 py-3 rounded-lg text-gray-700" title="Trunks">
+                    <i data-feather="phone" class="w-5 h-5 flex-shrink-0 mr-3"></i>
+                    <span class="nav-text">Trunks</span>
+                </div>
+                <a href="/trunks/dispatch.html"
+                    class="nav-item flex items-center px-4 py-2 rounded-lg text-gray-700 hover:bg-gray-100 transition-all pl-10"
+                    data-nav="trunks-dispatch" title="Dispatch Rules">
+                    <span class="nav-text">Dispatch Rules</span>
+                </a>
+                <a href="/trunks/inbound.html"
+                    class="nav-item flex items-center px-4 py-2 rounded-lg text-gray-700 hover:bg-gray-100 transition-all pl-10"
+                    data-nav="trunks-inbound" title="Inbound Trunks">
+                    <span class="nav-text">Inbound</span>
+                </a>
+                <a href="/trunks/outbound.html"
+                    class="nav-item flex items-center px-4 py-2 rounded-lg text-gray-700 hover:bg-gray-100 transition-all pl-10"
+                    data-nav="trunks-outbound" title="Outbound Trunks">
+                    <span class="nav-text">Outbound</span>
+                </a>
+            </div>
+            <div class="nav-item flex items-center px-4 py-3 rounded-lg text-gray-400 cursor-not-allowed opacity-60"
+                data-nav="dids" title="DID Numbers (coming soon)">
+                <i data-feather="hash" class="w-5 h-5 flex-shrink-0 mr-3"></i>
+                <span class="nav-text">DID Numbers</span>
+            </div>
+        </nav>
+
+        <!-- Account Section at Bottom -->
+        <div class="p-4 border-t border-gray-100 mt-auto">
+            <button
+                class="w-full flex items-center px-4 py-3 rounded-lg text-gray-600 hover:bg-gray-100 transition-all text-left">
+                <div
+                    class="w-10 h-10 rounded-full flex-shrink-0 bg-gradient-to-br from-blue-400 to-purple-500 flex items-center justify-center text-white font-bold text-sm mr-3">
+                    A
+                </div>
+                <div class="flex-1 min-w-0 user-info">
+                    <p class="text-sm font-medium text-gray-900 truncate">Admin User</p>
+                    <p class="text-xs text-gray-500 truncate">admin@creative.nest</p>
+                </div>
+            </button>
+        </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main id="main-content" class="md:ml-72 flex-1 overflow-auto transition-all duration-300">
+        <!-- Page content will be injected here -->
+    </main>
+</div>
+
+<!-- Mobile Overlay -->
+<div id="sidebar-overlay" class="fixed inset-0 bg-black/50 z-40 hidden md:hidden"></div>
